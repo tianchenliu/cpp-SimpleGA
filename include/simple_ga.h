@@ -1,5 +1,5 @@
-#ifndef GA_PROBLEM_H
-#define GA_PROBLEM_H
+#ifndef SIMPLE_GA_H
+#define SIMPLE_GA_H
 
 #include <iostream> 
 #include <vector>
@@ -9,7 +9,7 @@
 #include "chromosome.h"
 #include "individual.h"
 
-class GaProblem
+class SimpleGa
 {
 private: 
     int n_pop; // number of population
@@ -22,8 +22,8 @@ public:
     std::vector<Individual> pop_gen_now; // population, current generation
 
 public:
-    GaProblem();
-    ~GaProblem();
+    SimpleGa();
+    ~SimpleGa();
     
     // Non-parametric functions for testing classes
     void TestChromosomeClass();

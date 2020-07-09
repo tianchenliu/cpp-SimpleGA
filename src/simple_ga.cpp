@@ -1,6 +1,6 @@
-#include "ga_problem.h"
+#include "simple_ga.h"
 
-GaProblem::GaProblem()
+SimpleGa::SimpleGa()
 {
     n_pop = 50;
     n_vars = 2; // dim of variables = number of chromos
@@ -9,11 +9,11 @@ GaProblem::GaProblem()
     k_precision = 1e-4;
 }
 
-GaProblem::~GaProblem()
+SimpleGa::~SimpleGa()
 {
 }
 
-void GaProblem::TestChromosomeClass() {
+void SimpleGa::TestChromosomeClass() {
     int n;
     std::cout << "Enter n_len: ";
     std::cin >> n; 
@@ -32,7 +32,7 @@ void GaProblem::TestChromosomeClass() {
     c1.PrintMutationPositions();
 }
 
-void GaProblem::TestIndividualClass() {    
+void SimpleGa::TestIndividualClass() {    
     Individual i1(1, n_vars, lb, ub, k_precision);
     i1.FindValues();
     i1.PrintIndividual();
@@ -44,30 +44,30 @@ void GaProblem::TestIndividualClass() {
 
 }
 
-void GaProblem::InitPopulation() {
+void SimpleGa::InitPopulation() {
     for (int i=0; i<n_pop; i++) {
         Individual idv(i, n_vars, lb, ub, k_precision);
         pop_gen_prev.push_back(idv);
     }
 }
 
-void GaProblem::Evaluation(){
+void SimpleGa::Evaluation(){
 
 }
 
-void GaProblem::Selection(){
+void SimpleGa::Selection(){
 
 }
 
-void GaProblem::Crossover() {
+void SimpleGa::Crossover() {
 
 }
 
-void GaProblem::Mutation() {
+void SimpleGa::Mutation() {
 
 }
 
-bool GaProblem::CheckStopping() {
+bool SimpleGa::CheckStopping() {
     bool flag_stop = false;
 
     return flag_stop;

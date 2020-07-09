@@ -1,10 +1,10 @@
-#include "ga_problem.h"
+#include "simple_ga.h"
 
 using namespace std;
 
 int main()
 {
-    GaProblem ga1;
+    SimpleGa ga1;
     //ga1.TestChromosomeClass();
     //ga1.TestIndividualClass();
     ga1.InitPopulation();
