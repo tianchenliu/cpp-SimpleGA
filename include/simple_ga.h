@@ -19,6 +19,7 @@ class SimpleGa
 private: 
     double k_pct_selection = 0.5; // % of individuals selected for next generation
 public: 
+    int counter_idv = 0; // Counter of individuals
     int n_pop; // number of population
     int n_vars; // dim of variables = number of chromos
     std::vector<double> lb; // a <double> vector for lower bounds

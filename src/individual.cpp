@@ -15,6 +15,18 @@ Individual::Individual(int id, int n_vars, std::vector<double> lb, std::vector<d
     FindValues();
 }
 
+Individual::Individual(int id, std::vector<Chromosome> chromos_input) {
+    this->id = id;
+    this->n_vars = chromos_input.size();
+    std::cout << " " << n_vars << std::endl;
+    for (int i=0; i<n_vars; i++) {
+        int n_genes = chromos_input[i].n_len;
+        std::cout << n_genes << " ";
+    }
+    this->chromos = chromos_input;
+    //FindValues();
+}
+
 Individual::~Individual()
 {
 }
@@ -48,7 +60,6 @@ void Individual::FindValues() {
 
 void Individual::PrintIndividual() {
     std::cout << "Individual " << id << ":" << "# of vars: " << n_vars << std::endl;
-    /*
     std::cout << "# of chromos: " << n_genes_per_chromo.size() << std::endl;
     
     std::cout << "# of genes per chromo: ";
@@ -63,7 +74,6 @@ void Individual::PrintIndividual() {
     }
     std::cout << std::endl;
     
-    */
     std::cout << "True values of chromos: ";
     for (int i=0; i<true_values.size(); i++) {
         std::cout << true_values[i] << " ";

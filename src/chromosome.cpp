@@ -24,6 +24,14 @@ Chromosome::Chromosome(int id_input, int n_len_input, double p_mutation_input)
     GenerateChromo();
 }
 
+Chromosome::Chromosome(int id_input, std::vector<int> chromo_input)
+{
+    id = id_input;
+    n_len = chromo_input.size();
+    p_mutation = 0.05;
+    chromo = chromo_input;
+}
+
 Chromosome::~Chromosome()
 {
 }

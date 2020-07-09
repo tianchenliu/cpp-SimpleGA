@@ -30,6 +30,7 @@ public:
     Chromosome();
     Chromosome(int, int);
     Chromosome(int, int, double); // in: id, n_len, p_mutation
+    Chromosome(int, std::vector<int>);
     ~Chromosome();
     
     void SetDim(int n_len_input) {this -> n_len = n_len_input; };

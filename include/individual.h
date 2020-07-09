@@ -23,6 +23,7 @@ private:
 public:
     Individual();
     Individual(int, int, std::vector<double>, std::vector<double>, double);
+    Individual(int, std::vector<Chromosome>);
     ~Individual();
 
     void GenerateIndividual();
