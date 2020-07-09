@@ -21,10 +21,14 @@ private:
 public: 
     int counter_idv = 0; // Counter of individuals
     int n_pop; // number of population
+
     int n_vars; // dim of variables = number of chromos
+
     std::vector<double> lb; // a <double> vector for lower bounds
     std::vector<double> ub; // a <double> vector for upper bounds
-    double k_precision;
+    double k_precision; // solution precision
+    std::vector<double> k_increment; // increment
+
     std::vector<Individual> pop_gen_prev; // population, previous generation
     std::vector<Individual> pop_gen_now; // population, current generation
     std::vector<std::vector<double> > val_pop_gen_prev; // value of population, previous generation
