@@ -11,18 +11,19 @@ Individual::Individual(int id, int n_vars, std::vector<double> lb, std::vector<d
     this->lb = lb;
     this->ub = ub;
     this->k_precision = k_precision;
-    GenerateIndividual();
-    FindValues();
+    InitIndividual();
 }
 
 Individual::Individual(int id, std::vector<Chromosome> chromos_input) {
     this->id = id;
     this->n_vars = chromos_input.size();
-    std::cout << " " << n_vars << std::endl;
+    std::cout << "# of vars: " << n_vars << std::endl;
+
     for (int i=0; i<n_vars; i++) {
         int n_genes = chromos_input[i].n_len;
-        std::cout << n_genes << " ";
+        n_genes_per_chromo.push_back(n_genes);
     }
+
     this->chromos = chromos_input;
     //FindValues();
 }
@@ -31,10 +32,11 @@ Individual::~Individual()
 {
 }
 
-void Individual::GenerateIndividual() {
+void Individual::InitIndividual() {
     for (int i=0; i<n_vars; i++) {
         double n_val = (ub[i] - lb[i]) / k_precision;
         int n_genes = int(floor(log2(n_val))) + 1;
+        k_increment[i] = (ub[i] - lb[i]) / double(pow(2, n_genes));
         n_genes_per_chromo.push_back(n_genes);
         Chromosome chr(i, n_genes);
         chromos.push_back(chr);
@@ -44,12 +46,11 @@ void Individual::GenerateIndividual() {
 void Individual::FindValues() {
     for (int i=0; i<n_vars; i++) {
         int n_genes = n_genes_per_chromo[i];
-        std::vector<int> chromo = chromos[i].GetChromo();
-        double h = (ub[i] - lb[i]) / double(pow(2, n_genes));
+        std::vector<int> chromo = chromos[i].GetChromo();        
         double true_value = lb[i];
         for (int idx_gene = 0; idx_gene < n_genes; idx_gene++) {
             if (chromo[idx_gene] == 1) {
-                double current_h = h * pow(2, n_genes-1-idx_gene);
+                double current_h = k_increment[i] * pow(2, n_genes-1-idx_gene);
                 true_value += current_h;
                 //std::cout << true_value << " "; 
             }

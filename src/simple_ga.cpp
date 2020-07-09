@@ -56,7 +56,11 @@ void SimpleGa::TestIndividualClass() {
     //i1.FindValues();
     //i1.PrintIndividual();
 
-    Chromosome c1(1, 14), c2(2, 14);
+    std::vector<int> chromo_input1 = {1,0,1,0,1,1,0,0,1,0};
+    Chromosome c1(1, chromo_input1);
+    std::vector<int> chromo_input2 = {1,1,0,0,0,1,0,1,1,0};
+    Chromosome c2(2, chromo_input2);
+    
     std::vector<Chromosome> chromos_input;
     chromos_input.push_back(c1);
     chromos_input.push_back(c2);
