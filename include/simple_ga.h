@@ -8,6 +8,7 @@
 
 #include "chromosome.h"
 #include "individual.h"
+#include "fitness.h"
 
 class SimpleGa
 {
@@ -20,6 +21,8 @@ public:
     double k_precision;
     std::vector<Individual> pop_gen_prev; // population, previous generation
     std::vector<Individual> pop_gen_now; // population, current generation
+    std::vector<double> pop_gen_val_prev; // population, previous generation
+    std::vector<double> pop_gen_val_now; // population, current generation
 
 public:
     SimpleGa();
@@ -31,7 +34,7 @@ public:
 
     void InitPopulation();
 
-    void Evaluation();
+    void Evaluation(Fitness);
     void Selection();
     void Crossover();
     void Mutation();

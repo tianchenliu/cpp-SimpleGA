@@ -51,8 +51,11 @@ void SimpleGa::InitPopulation() {
     }
 }
 
-void SimpleGa::Evaluation(){
-
+void SimpleGa::Evaluation(Fitness fit){
+    pop_gen_val_prev.clear();
+    for (int i=0; i<n_pop; i++) {
+        pop_gen_val_prev.push_back(fit.FitnessEval1(pop_gen_prev[i]));
+    }
 }
 
 void SimpleGa::Selection(){
