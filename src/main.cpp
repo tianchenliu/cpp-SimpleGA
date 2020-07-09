@@ -11,10 +11,15 @@ int main()
     ga1.InitPopulation();
     ga1.Evaluation(fit1);
 
-    for (int i=10; i<20; i++) {
-        ga1.pop_gen_prev[i].PrintIndividualInfo();
-        cout << ga1.pop_gen_val_prev[i] << endl;
-    }
+    //for (int i=0; i<ga1.n_pop; i++) {
+    //    ga1.pop_gen_prev[i].PrintIndividualInfo();
+    //    cout << ga1.val_pop_gen_prev[i][1] << endl;
+    //}
+    //cout << endl;
+    
+    ga1.Selection();
+    //for (int i=0; i<10; i++) { ga1.pop_gen_now[i].PrintIndividualInfo(); }
+    //cout << endl;
 
     
     

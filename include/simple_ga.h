@@ -6,6 +6,10 @@
 #include <random>
 #include <cmath>
 
+#include <numeric>      // std::iota
+#include <algorithm>    // std::sort, std::stable_sort
+
+
 #include "chromosome.h"
 #include "individual.h"
 #include "fitness.h"
@@ -13,17 +17,18 @@
 class SimpleGa
 {
 private: 
-    int n_pop; // number of population
+    double k_pct_selection = 0.5; // % of individuals selected for next generation
 public: 
+    int n_pop; // number of population
     int n_vars; // dim of variables = number of chromos
     std::vector<double> lb; // a <double> vector for lower bounds
     std::vector<double> ub; // a <double> vector for upper bounds
     double k_precision;
     std::vector<Individual> pop_gen_prev; // population, previous generation
     std::vector<Individual> pop_gen_now; // population, current generation
-    std::vector<double> pop_gen_val_prev; // population, previous generation
-    std::vector<double> pop_gen_val_now; // population, current generation
-
+    std::vector<std::vector<double> > val_pop_gen_prev; // value of population, previous generation
+    std::vector<double> val_pop_gen_now; // value of population, current generation
+    
 public:
     SimpleGa();
     ~SimpleGa();

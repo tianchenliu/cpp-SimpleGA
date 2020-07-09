@@ -2,7 +2,7 @@
 
 SimpleGa::SimpleGa()
 {
-    n_pop = 50;
+    n_pop = 20;
     n_vars = 2; // dim of variables = number of chromos
     lb = {0., 0.}; // a <double> vector for lower bounds
     ub = {1., 1.}; // a <double> vector for upper bounds
@@ -51,15 +51,28 @@ void SimpleGa::InitPopulation() {
     }
 }
 
+// Evaluate fitness function value for the whole population
 void SimpleGa::Evaluation(Fitness fit){
-    pop_gen_val_prev.clear();
+    val_pop_gen_prev.clear();
     for (int i=0; i<n_pop; i++) {
-        pop_gen_val_prev.push_back(fit.FitnessEval1(pop_gen_prev[i]));
+        val_pop_gen_prev.push_back({double(i), fit.FitnessEval1(pop_gen_prev[i])});
     }
 }
 
 void SimpleGa::Selection(){
-
+    std::sort(val_pop_gen_prev.begin(), val_pop_gen_prev.end(),
+    [] (const std::vector<double> &a, const std::vector<double> &b) 
+    {
+        return a[1] < b[1];
+    });
+    
+    pop_gen_now.clear();
+    int n_idv_kept = int(k_pct_selection * val_pop_gen_prev.size());
+    
+    for (int i=0; i<n_idv_kept; i++) {
+        int idx_pop_gen_prev = int(val_pop_gen_prev[i][0]);
+        pop_gen_now.push_back(pop_gen_prev[idx_pop_gen_prev]);
+    }
 }
 
 void SimpleGa::Crossover() {
