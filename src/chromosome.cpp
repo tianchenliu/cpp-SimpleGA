@@ -77,13 +77,13 @@ void Chromosome::PrintAllInfo() {
     std::cout << std::endl;
     
     if (idx_mut_pos.size() != 0) {
-        std::cout << "Mutation positions: ";
+        std::cout << "Chromosome mutation @ positions: ";
         for (int i=0; i<idx_mut_pos.size(); i++) {
             std::cout << idx_mut_pos[i] << " ";
         }
     }
-    else {
-        std::cout << "No Mutation";
-    }
+    //else {
+    //    std::cout << "No Mutation";
+    //}
     std::cout << std::endl; 
 }

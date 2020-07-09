@@ -45,8 +45,13 @@ void SimpleGa::TestChromosomeClass() {
     std::cout << "After crossover: " << std::endl;
     c1.PrintAllInfo();
 
-    c1.Mutation();
-    c1.PrintAllInfo();
+    for (int i=0; i<5; i++) {
+        std::cout << "Try mutation " << i+1 << ": " << std::endl;
+        c1.Mutation();
+        c1.PrintAllInfo();
+        std::cout << std::endl;
+    } 
+    
 }
 
 void SimpleGa::TestIndividualClass() {    
