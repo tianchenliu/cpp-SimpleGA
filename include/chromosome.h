@@ -43,8 +43,7 @@ public:
     void Crossover(Chromosome, int); // in: another Chromosome, idx of crossover cases
     void Mutation(); // calculates idx of mutation positions
 
-    void PrintChromo();
-    void PrintMutationPositions();
+    void PrintAllInfo();
 };
 
 #endif

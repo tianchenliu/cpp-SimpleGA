@@ -13,6 +13,7 @@ Chromosome::Chromosome(int id_input, int n_len_input)
         chr[i] = round(UniformRandomNumber(0., 1.));
     }
     chromo = chr;
+    idx_mut_pos = {};
 }
 
 Chromosome::Chromosome(int id_input, std::vector<int> chromo_input)
@@ -20,6 +21,7 @@ Chromosome::Chromosome(int id_input, std::vector<int> chromo_input)
     id = id_input;
     chromo = chromo_input;
     n_len = chromo_input.size();
+    idx_mut_pos = {};
 }
 
 Chromosome::~Chromosome()
@@ -56,8 +58,8 @@ void Chromosome::Crossover(Chromosome c2, int idx_case = 0) {
 }
 
 void Chromosome::Mutation() {  
+    idx_mut_pos.clear();
     bool if_mut;
-
     for (int i=0; i<n_len; i++) {
         if_mut = (UniformRandomNumber(0., 1.) < p_mutation);
         if (if_mut) {
@@ -67,24 +69,21 @@ void Chromosome::Mutation() {
     }
 }
 
-void Chromosome::PrintChromo() {
+void Chromosome::PrintAllInfo() {
     std::cout << "Chromosome " << id << ": " << std::endl;
     for (int i=0; i<n_len; i++) {
         std::cout << chromo[i] << " ";
     }
     std::cout << std::endl;
-}
-
-void Chromosome::PrintMutationPositions() {
-    std::cout << "Mutation positions: ";
+    
     if (idx_mut_pos.size() != 0) {
+        std::cout << "Mutation positions: ";
         for (int i=0; i<idx_mut_pos.size(); i++) {
             std::cout << idx_mut_pos[i] << " ";
         }
     }
     else {
-        std::cout << "None.";
+        std::cout << "No Mutation";
     }
-
     std::cout << std::endl; 
 }

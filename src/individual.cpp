@@ -15,7 +15,7 @@ void Individual::PrintAllInfo() {
     
     std::cout << "Chromos: " << std::endl;
     for (int i=0; i<n_chromos; i++) {
-        chromos[i].PrintChromo();
+        chromos[i].PrintAllInfo();
     }
     std::cout << std::endl;
 }

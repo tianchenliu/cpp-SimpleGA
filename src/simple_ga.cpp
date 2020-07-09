@@ -38,23 +38,18 @@ void SimpleGa::TestChromosomeClass() {
    std::vector<int> chromo_input2 = {1,1,0,0,0,1,0,1,1,0};
    Chromosome c2(2, chromo_input2);
    
-    c1.PrintChromo();
-    c2.PrintChromo();
+    c1.PrintAllInfo();
+    c2.PrintAllInfo();
 
     c1.Crossover(c2, 1);
     std::cout << "After crossover: " << std::endl;
-    c1.PrintChromo();
+    c1.PrintAllInfo();
 
     c1.Mutation();
-    c1.PrintChromo();
-    c1.PrintMutationPositions();
-
+    c1.PrintAllInfo();
 }
 
 void SimpleGa::TestIndividualClass() {    
-    //Individual i1(1, n_vars, lb, ub, k_precision);
-    //i1.FindValues();
-    //i1.PrintIndividual();
 
     std::vector<int> chromo_input1 = {1,0,1,0,1,1,0,0,1,0};
     Chromosome c1(1, chromo_input1);

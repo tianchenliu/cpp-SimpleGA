@@ -6,8 +6,8 @@ int main()
 {
     SimpleGa ga1;
     Fitness fit1;
-    //ga1.TestChromosomeClass(); 
-    ga1.TestIndividualClass();
+    ga1.TestChromosomeClass(); 
+    //ga1.TestIndividualClass();
     
     //ga1.InitPopulation();
     //ga1.Evaluation(fit1);
