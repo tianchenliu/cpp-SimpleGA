@@ -85,6 +85,7 @@ void SimpleGa::SetProblemProperty() {
     }
 
     k_pct_selection = 0.5;
+    n_kept_idv = int(k_pct_selection * n_pop);
 }
 
 double SimpleGa::FitnessFunc(std::vector<double> x) {
@@ -134,21 +135,48 @@ void SimpleGa::EvalIdv(Individual &idv) {
 
 void SimpleGa::EvalPop() {
     for (int i=0; i<n_pop; i++) {
-        Individual idv = pop[i];
-        EvalIdv(idv);
+        EvalIdv(pop[i]);
 
         std::vector<double> val_idv;
 
         val_idv.push_back(double(i));
-        val_idv.push_back(idv.val_fitness);
+        val_idv.push_back(pop[i].val_fitness);
         for (int j=0; j<n_vars; j++) {
-            val_idv.push_back(idv.val_var[j]);
+            val_idv.push_back(pop[i].val_var[j]);
         }
 
         val_pop.push_back(val_idv);
     }
 }
 
+void SimpleGa::Selection() {
+    std::sort(val_pop.begin(), val_pop.end(),
+    [] (const std::vector<double> &a, const std::vector<double> &b) 
+    {
+        return a[1] < b[1];
+    });
+    
+    pop_next.clear();
+
+    for (int i=0; i<n_kept_idv; i++) {
+        int idx_kept_idv = int(val_pop[i][0]);
+        pop_next.push_back(pop[idx_kept_idv]);
+    }
+}
+
+void SimpleGa::Crossover() {
+
+}
+
+void SimpleGa::Mutation() {
+
+}
+
+bool SimpleGa::CheckStopping() {
+    bool flag_stop = false;
+
+    return flag_stop;
+}
 
 
 void SimpleGa::PrintAllInfo() {
@@ -162,13 +190,6 @@ void SimpleGa::PrintAllInfo() {
         std::cout << n_genes[i] << " ";
     }
     std::cout << std::endl;
-    
-
-    for (int i=0; i<n_pop; i++) {
-        pop[i].PrintAllInfo();
-        std::cout << std::endl;
-    }
-    */
 
     for (int i=0; i<n_pop; i++) {
         //pop[i].PrintAllInfo();
@@ -178,6 +199,11 @@ void SimpleGa::PrintAllInfo() {
         }
         std::cout << std::endl;
     }
+    */
     
+    for (int i=0; i<pop_next.size(); i++) {
+        pop_next[i].PrintAllInfo();
+        std::cout << std::endl;
+    }
 
 }

@@ -87,3 +87,11 @@ void Chromosome::PrintAllInfo() {
     //}
     std::cout << std::endl; 
 }
+
+void Chromosome::PrintCustomInfo() {
+    std::cout << "Chromosome " << id << ": ";
+    for (int i=0; i<n_len; i++) {
+        std::cout << chromo[i] << " ";
+    }
+    std::cout << std::endl;
+}

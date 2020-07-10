@@ -17,6 +17,8 @@ class SimpleGa
 {
 private: 
     double k_pct_selection; // % of individuals selected for next generation
+    int n_kept_idv;
+
 public: 
     int n_vars; // dim of variables = number of chromos
     std::vector<double> lb; // a <double> vector for lower bounds
@@ -31,11 +33,7 @@ public:
     std::vector<Individual> pop;
     std::vector<std::vector<double> > val_pop;
 
-
-    std::vector<Individual> pop_gen_prev; // population, previous generation
-    std::vector<Individual> pop_gen_now; // population, current generation
-    std::vector<std::vector<double> > val_pop_gen_prev; // value of population, previous generation
-    std::vector<double> val_pop_gen_now; // value of population, current generation
+    std::vector<Individual> pop_next;
     
 public:
     SimpleGa();
@@ -56,11 +54,12 @@ public:
     void InitPopulation();
     
     void EvalIdv(Individual &);
-    void EvalPop();     
+    void EvalPop();
+
+    void Selection();     
 
     // Incomplete
-    void Evaluation();
-    void Selection();
+    
     void Crossover();
     void Mutation();
     bool CheckStopping();

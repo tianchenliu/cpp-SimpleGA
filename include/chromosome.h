@@ -44,6 +44,7 @@ public:
     void Mutation(); // calculates idx of mutation positions
 
     void PrintAllInfo();
+    void PrintCustomInfo();
 };
 
 #endif

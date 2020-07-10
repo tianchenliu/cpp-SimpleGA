@@ -13,10 +13,18 @@ Individual::~Individual()
 void Individual::PrintAllInfo() {
     std::cout << "Individual " << id << std::endl;
     
-    std::cout << "Chromos: " << std::endl;
+    // std::cout << "Chromos: " << std::endl;
     for (int i=0; i<n_chromos; i++) {
-        chromos[i].PrintAllInfo();
+        chromos[i].PrintCustomInfo();
+    }
+    //std::cout << std::endl;
+
+    std::cout << "True values: ";
+    for (int i=0; i<val_var.size(); i++) {
+        std::cout << val_var[i] << " ";
     }
     std::cout << std::endl;
+
+    std::cout << "Fitness value: " << val_fitness << std::endl;
 }
 
