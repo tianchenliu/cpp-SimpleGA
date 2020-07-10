@@ -12,7 +12,6 @@
 
 #include "chromosome.h"
 #include "individual.h"
-#include "fitness.h"
 
 class SimpleGa
 {
@@ -30,7 +29,8 @@ public:
     int n_pop; // number of population
 
     std::vector<Individual> pop;
-    std::vector<std::vector<double> > val_var_pop;
+    std::vector<std::vector<double> > val_pop;
+
 
     std::vector<Individual> pop_gen_prev; // population, previous generation
     std::vector<Individual> pop_gen_now; // population, current generation
@@ -48,17 +48,18 @@ public:
     // Function to set problem properties
     // Used in initializer
     void SetProblemProperty();
+    double FitnessFunc(std::vector<double>);
 
     // Generate individuals
     Individual GenerateIndividual(int);
     Individual GenerateIndividual(int, std::vector<Chromosome>);
-    
     void InitPopulation();
+    
+    void EvalIdv(Individual &);
+    void EvalPop();     
 
-    std::vector<double> FindVarValueIdv(Individual &);
-    void FindVarValuePop();
-
-    void Evaluation(Fitness);
+    // Incomplete
+    void Evaluation();
     void Selection();
     void Crossover();
     void Mutation();

@@ -87,6 +87,11 @@ void SimpleGa::SetProblemProperty() {
     k_pct_selection = 0.5;
 }
 
+double SimpleGa::FitnessFunc(std::vector<double> x) {
+  double fval = pow(x[0] - 0.5, 2) + pow(x[1] - 0.5, 2);
+  return fval;
+}
+
 Individual SimpleGa::GenerateIndividual(int id) {
     std::vector<Chromosome> chromos;
     
@@ -111,7 +116,7 @@ void SimpleGa::InitPopulation() {
     }
 }
 
-std::vector<double> SimpleGa::FindVarValueIdv(Individual &idv) {
+void SimpleGa::EvalIdv(Individual &idv) {
     std::vector<double> val_var_idv = lb;
     std::vector<int> c;
     for (int i=0; i<n_vars; i++) {
@@ -123,17 +128,28 @@ std::vector<double> SimpleGa::FindVarValueIdv(Individual &idv) {
             }            
         }
     }
-    
-    return val_var_idv;
+    idv.val_var = val_var_idv;
+    idv.val_fitness = FitnessFunc(val_var_idv);
 }
 
-void SimpleGa::FindVarValuePop() {
-    std::vector<double> val_idv;
+void SimpleGa::EvalPop() {
     for (int i=0; i<n_pop; i++) {
-        val_idv = FindVarValueIdv(pop[i]);
-        val_var_pop.push_back(val_idv);
+        Individual idv = pop[i];
+        EvalIdv(idv);
+
+        std::vector<double> val_idv;
+
+        val_idv.push_back(double(i));
+        val_idv.push_back(idv.val_fitness);
+        for (int j=0; j<n_vars; j++) {
+            val_idv.push_back(idv.val_var[j]);
+        }
+
+        val_pop.push_back(val_idv);
     }
 }
+
+
 
 void SimpleGa::PrintAllInfo() {
     /*
@@ -156,8 +172,11 @@ void SimpleGa::PrintAllInfo() {
 
     for (int i=0; i<n_pop; i++) {
         //pop[i].PrintAllInfo();
-        std::cout << "Individual " << i << " values: ";
-        std::cout << val_var_pop[i][0] << " " << val_var_pop[i][1] << std::endl;
+        std::cout << "Individual " << i << " values: " << std::endl;
+        for (int j=0; j<val_pop[0].size(); j++) {
+            std::cout << val_pop[i][j] << " ";
+        }
+        std::cout << std::endl;
     }
     
 

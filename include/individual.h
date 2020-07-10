@@ -15,7 +15,8 @@ private:
 public:
     int id;
     std::vector<Chromosome> chromos; // all chromos of an individual
-    std::vector<double> var_values; // real variable values of chromos
+    std::vector<double> val_var; // real variable values of chromos
+    double val_fitness;
 
 public:
     Individual(int, std::vector<Chromosome>);
