@@ -43,6 +43,8 @@ public:
     void TestChromosomeClass();
     void TestIndividualClass();
 
+    double UniformRandomNumber(double, double); 
+
     // Function to set problem properties
     // Used in initializer
     void SetProblemProperty();
@@ -57,10 +59,11 @@ public:
     void EvalPop();
 
     void Selection();     
+    void Crossover();
 
     // Incomplete
     
-    void Crossover();
+    
     void Mutation();
     bool CheckStopping();
 

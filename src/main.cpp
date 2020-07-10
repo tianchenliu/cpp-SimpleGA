@@ -12,8 +12,7 @@ int main()
     ga1.EvalPop();
     
     ga1.Selection();
-    
-    cout << endl;
+    ga1.Crossover();
 
     ga1.PrintAllInfo();
 

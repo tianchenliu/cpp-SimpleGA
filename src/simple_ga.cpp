@@ -66,6 +66,13 @@ void SimpleGa::TestIndividualClass() {
     i2.PrintAllInfo();
 }
 
+double SimpleGa::UniformRandomNumber(double lb, double ub) {
+    std::random_device rd;  //Will be used to obtain a seed for the random number engine 
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_real_distribution<> U_Distr(lb, ub);
+    return U_Distr(gen);
+}
+
 void SimpleGa::SetProblemProperty() {
     counter_idv = 0;
     n_pop = 20;
@@ -165,7 +172,27 @@ void SimpleGa::Selection() {
 }
 
 void SimpleGa::Crossover() {
+    for (int i=0; i < n_pop-n_kept_idv; i++) {
+        int idx1 = int(floor(UniformRandomNumber(0., 1.) * n_kept_idv));
+        int idx2 = int(floor(UniformRandomNumber(0., 1.) * n_kept_idv));
 
+        Individual idv1 = pop_next[idx1];
+        Individual idv2 = pop_next[idx2];
+
+        std::vector<Chromosome> new_chromos;
+
+        for (int idx_chr=0; idx_chr<n_vars; idx_chr++) {
+            Chromosome chr1 = idv1.chromos[idx_chr];
+            Chromosome chr2 = idv2.chromos[idx_chr];
+            chr1.Crossover(chr2, 1);
+            new_chromos.push_back(chr1);
+        }
+
+        Individual child_idv(counter_idv, new_chromos);
+        EvalIdv(child_idv);
+        pop_next.push_back(child_idv);
+        counter_idv++;
+    }    
 }
 
 void SimpleGa::Mutation() {

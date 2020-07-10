@@ -41,7 +41,7 @@ void Chromosome::Crossover(Chromosome c2, int idx_case = 0) {
     case 1:
     {
         int idx_pt_crossover = int(round(UniformRandomNumber(0.3, 0.7)*(this->n_len)));
-        std::cout << idx_pt_crossover << std::endl;
+        //std::cout << idx_pt_crossover << std::endl;
         for (int i=idx_pt_crossover; i < this->n_len; i++) {
             this->chromo[i] = c2.chromo[i];
         }
