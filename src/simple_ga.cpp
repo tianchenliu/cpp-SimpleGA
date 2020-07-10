@@ -2,11 +2,7 @@
 
 SimpleGa::SimpleGa()
 {
-    n_pop = 20;
-    n_vars = 2; // dim of variables = number of chromos
-    lb = {0., 0.}; // a <double> vector for lower bounds
-    ub = {1., 1.}; // a <double> vector for upper bounds
-    k_precision = 1e-4;
+    SetProblemProperty();
 }
 
 SimpleGa::~SimpleGa()
@@ -68,5 +64,101 @@ void SimpleGa::TestIndividualClass() {
     Individual i2(2, chromos_input);
     
     i2.PrintAllInfo();
+}
+
+void SimpleGa::SetProblemProperty() {
+    counter_idv = 0;
+    n_pop = 20;
+    
+    n_vars = 2; // dim of variables = number of chromos
+    lb = {0., 0.}; // a <double> vector for lower bounds
+    ub = {1., 1.}; // a <double> vector for upper bounds
+    k_precision = 1e-4;
+    
+    k_increment.resize(n_vars, 0.);
+    n_genes.resize(n_vars, 0);
+
+    for (int i=0; i<n_vars; i++) {
+        double n_val = (ub[i] - lb[i]) / k_precision;
+        n_genes[i] = int(floor(log2(n_val))) + 1;
+        k_increment[i] = (ub[i] - lb[i]) / double(pow(2, n_genes[i]));
+    }
+
+    k_pct_selection = 0.5;
+}
+
+Individual SimpleGa::GenerateIndividual(int id) {
+    std::vector<Chromosome> chromos;
+    
+    for (int i=0; i<n_vars; i++) {
+        Chromosome chromo(i, n_genes[i]);
+        chromos.push_back(chromo);
+    }   
+    Individual idv(id, chromos);
+
+    return idv; 
+}
+
+Individual SimpleGa::GenerateIndividual(int id, std::vector<Chromosome> chromos) {
+    Individual idv(id, chromos);
+    return idv;
+}
+
+void SimpleGa::InitPopulation() {
+    for (int i=0; i<n_pop; i++) {
+        pop.push_back(GenerateIndividual(counter_idv));
+        counter_idv++;
+    }
+}
+
+std::vector<double> SimpleGa::FindVarValueIdv(Individual &idv) {
+    std::vector<double> val_var_idv = lb;
+    std::vector<int> c;
+    for (int i=0; i<n_vars; i++) {
+        c = idv.chromos[i].GetChromo();
+        for (int idx_gene=0; idx_gene<n_genes[i]; idx_gene++) {
+            if (c[idx_gene] == 1) {
+                double current_increment = pow(2, n_genes[i]-1-idx_gene);
+                val_var_idv[i] += k_increment[i] * current_increment; 
+            }            
+        }
+    }
+    
+    return val_var_idv;
+}
+
+void SimpleGa::FindVarValuePop() {
+    std::vector<double> val_idv;
+    for (int i=0; i<n_pop; i++) {
+        val_idv = FindVarValueIdv(pop[i]);
+        val_var_pop.push_back(val_idv);
+    }
+}
+
+void SimpleGa::PrintAllInfo() {
+    /*
+    for (int i=0; i<n_vars; i++) {
+        std::cout << k_increment[i] << " ";
+    }
+    std::cout << std::endl;
+
+    for (int i=0; i<n_vars; i++) {
+        std::cout << n_genes[i] << " ";
+    }
+    std::cout << std::endl;
+    
+
+    for (int i=0; i<n_pop; i++) {
+        pop[i].PrintAllInfo();
+        std::cout << std::endl;
+    }
+    */
+
+    for (int i=0; i<n_pop; i++) {
+        //pop[i].PrintAllInfo();
+        std::cout << "Individual " << i << " values: ";
+        std::cout << val_var_pop[i][0] << " " << val_var_pop[i][1] << std::endl;
+    }
+    
 
 }

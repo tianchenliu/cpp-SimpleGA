@@ -6,10 +6,12 @@ int main()
 {
     SimpleGa ga1;
     Fitness fit1;
-    ga1.TestChromosomeClass(); 
+    //ga1.TestChromosomeClass(); 
     //ga1.TestIndividualClass();
+
+    ga1.InitPopulation();
+    ga1.FindVarValuePop();
     
-    //ga1.InitPopulation();
     //ga1.Evaluation(fit1);
 
     //for (int i=0; i<ga1.n_pop; i++) {
@@ -23,6 +25,7 @@ int main()
     //cout << endl;
 
     
+    ga1.PrintAllInfo();
     
     return 0;
 }
