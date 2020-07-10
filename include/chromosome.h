@@ -15,7 +15,7 @@ private:
     int id;
 public:
     int n_len; // Number of genes
-    double p_mutation = 0.05; // Probability of mutation
+    double p_mutation = 0.1; // Probability of mutation
     std::vector<int> chromo; // Binary representation of chromosome
     std::vector<int> idx_mut_pos; // Indices of mutation positions
 

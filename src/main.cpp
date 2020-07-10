@@ -1,7 +1,5 @@
 #include "simple_ga.h"
 
-using namespace std;
-
 int main()
 {
     SimpleGa ga1;
@@ -9,17 +7,16 @@ int main()
     //ga1.TestIndividualClass();
 
     ga1.InitPopulation();
-    ga1.EvalPop();
     
-    ga1.Selection();
-    ga1.Crossover();
-
-    ga1.PrintAllInfo();
-
-    //std::cout << "Current total # of individuals: " << ga1.counter_idv << std::endl;
+    while (!ga1.flag_stop) {
+        ga1.EvalPop();
+        ga1.Selection();
+        ga1.CrossoverMutation();
+        ga1.CheckStop();
+        //ga1.PrintStepInfo();
+        std::cout << "One loop done. Largest id: " << ga1.counter_idv << std::endl;
+    }
+    ga1.PrintResults();
     
     return 0;
 }
-
-
-

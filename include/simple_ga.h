@@ -34,6 +34,8 @@ public:
     std::vector<std::vector<double> > val_pop;
 
     std::vector<Individual> pop_next;
+
+    bool flag_stop;
     
 public:
     SimpleGa();
@@ -59,15 +61,13 @@ public:
     void EvalPop();
 
     void Selection();     
-    void Crossover();
+    void CrossoverMutation();
 
-    // Incomplete
-    
-    
-    void Mutation();
-    bool CheckStopping();
+    bool CheckStop();
 
     void PrintAllInfo();
+    void PrintStepInfo();
+    void PrintResults();
 };
 
 #endif
