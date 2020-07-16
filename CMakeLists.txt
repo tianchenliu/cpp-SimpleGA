@@ -5,7 +5,6 @@ set (CMAKE_CXX_STANDARD 11)
 
 #Bring the headers, such as Student.h into the project
 include_directories(include)
-include_directories(eigen) 
 
 #Can manually add the sources using the set command as follows:
 #set(SOURCES 
@@ -13,6 +12,6 @@ include_directories(eigen)
 #)
  
 #However, the file(GLOB...) allows for wildcard additions:
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB SOURCES "src/*.cpp" "main.cpp")
  
 add_executable(main ${SOURCES})

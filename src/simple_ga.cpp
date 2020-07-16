@@ -183,7 +183,8 @@ void SimpleGa::PrintStepInfo() {
 }
 
 void SimpleGa::PrintResults() {
-    for (int i=0; i<n_kept_idv; i++) {
+    std::cout << "Best 10 individuals: " << std::endl;
+    for (int i=0; i<10; i++) {
         pop_next[i].PrintAllInfo();
         std::cout << std::endl;
     }
