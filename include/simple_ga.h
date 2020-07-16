@@ -40,16 +40,12 @@ public:
 public:
     SimpleGa();
     ~SimpleGa();
-    
-    // Non-parametric functions for testing classes
-    void TestChromosomeClass();
-    void TestIndividualClass();
 
     double UniformRandomNumber(double, double); 
 
     // Function to set problem properties
     // Used in initializer
-    void SetProblemProperty();
+    void SetProblemProperty(int, int, std::vector<double>, std::vector<double>, double);
     double FitnessFunc(std::vector<double>);
 
     // Generate individuals

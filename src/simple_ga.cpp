@@ -1,13 +1,7 @@
 #include "simple_ga.h"
 
-SimpleGa::SimpleGa()
-{
-    SetProblemProperty();
-}
-
-SimpleGa::~SimpleGa()
-{
-}
+SimpleGa::SimpleGa(){}
+SimpleGa::~SimpleGa(){}
 
 double SimpleGa::FitnessFunc(std::vector<double> x) {
   double fval = pow(x[0] - 0.4, 2) + pow(x[1] - 0.7, 2);
@@ -21,14 +15,14 @@ double SimpleGa::UniformRandomNumber(double lb, double ub) {
     return U_Distr(gen);
 }
 
-void SimpleGa::SetProblemProperty() {
+void SimpleGa::SetProblemProperty(int n_pop_in, int n_vars_in, std::vector<double> lb_in, std::vector<double> ub_in, double k_precision_in) {
     counter_idv = 0;
-    n_pop = 30;
+    this->n_pop = n_pop_in;
     
-    n_vars = 2; // dim of variables = number of chromos
-    lb = {0., 0.}; // a <double> vector for lower bounds
-    ub = {1., 1.}; // a <double> vector for upper bounds
-    k_precision = 1e-5;
+    this->n_vars = n_vars_in; // dim of variables = number of chromos
+    this->lb = lb_in; // a <double> vector for lower bounds
+    this->ub = ub_in; // a <double> vector for upper bounds
+    this->k_precision = k_precision_in;
     
     k_increment.resize(n_vars, 0.);
     n_genes.resize(n_vars, 0);
@@ -42,7 +36,7 @@ void SimpleGa::SetProblemProperty() {
     k_pct_selection = 0.5;
     n_kept_idv = int(k_pct_selection * n_pop);
 
-    bool flag_stop = false;
+    flag_stop = false;
 }
 
 Individual SimpleGa::GenerateIndividual(int id) {
@@ -180,6 +174,7 @@ void SimpleGa::PrintAllInfo() {
 }
 
 void SimpleGa::PrintStepInfo() {
+    std::cout << "One loop done. Largest id: " << counter_idv << std::endl;
 }
 
 void SimpleGa::PrintResults() {
@@ -188,61 +183,4 @@ void SimpleGa::PrintResults() {
         pop_next[i].PrintAllInfo();
         std::cout << std::endl;
     }
-}
-
-void SimpleGa::TestChromosomeClass() {
-    /*
-    int n;
-    std::cout << "Enter n_len: ";
-    std::cin >> n; 
-
-    Chromosome c1(1, n), c2(2, n);
-    
-    c1.PrintChromo();
-    c2.PrintChromo();
-
-    c1.Crossover(c2, 1);
-    std::cout << "After crossover: " << std::endl;
-    c1.PrintChromo();
-
-    c1.Mutation();
-    c1.PrintChromo();
-    c1.PrintMutationPositions();
-    */
-
-   std::vector<int> chromo_input1 = {1,0,1,0,1,1,0,0,1,0};
-   Chromosome c1(1, chromo_input1);
-   std::vector<int> chromo_input2 = {1,1,0,0,0,1,0,1,1,0};
-   Chromosome c2(2, chromo_input2);
-   
-    c1.PrintAllInfo();
-    c2.PrintAllInfo();
-
-    c1.Crossover(c2, 1);
-    std::cout << "After crossover: " << std::endl;
-    c1.PrintAllInfo();
-
-    for (int i=0; i<5; i++) {
-        std::cout << "Try mutation " << i+1 << ": " << std::endl;
-        c1.Mutation();
-        c1.PrintAllInfo();
-        std::cout << std::endl;
-    } 
-    
-}
-
-void SimpleGa::TestIndividualClass() {    
-
-    std::vector<int> chromo_input1 = {1,0,1,0,1,1,0,0,1,0};
-    Chromosome c1(1, chromo_input1);
-    std::vector<int> chromo_input2 = {1,1,0,0,0,1,0,1,1,0};
-    Chromosome c2(2, chromo_input2);
-    
-    std::vector<Chromosome> chromos_input;
-    chromos_input.push_back(c1);
-    chromos_input.push_back(c2);
-
-    Individual i2(2, chromos_input);
-    
-    i2.PrintAllInfo();
 }
