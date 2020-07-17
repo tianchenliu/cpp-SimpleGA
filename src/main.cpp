@@ -1,11 +1,11 @@
 #include "simple_ga.h"
 
-/*
+
 double FitnessFunc(std::vector<double> x) {
-    double fval = pow(x[0] - 0.4, 2) + pow(x[1] - 0.7, 2);
+    double fval = pow(x[0] - 0.2, 2) + pow(x[1] - 0.9, 2) + pow(x[2] - 0.5, 2);
     return fval;
 }
-*/
+
 
 int main()
 {
@@ -13,12 +13,13 @@ int main()
 
     // Problem parameters
     int n_pop = 60; // # of individuals in one generation
-    int n_vars = 2; // dim of variables = number of chromos
-    std::vector<double> lb = {0., 0.}; // a <double> vector for lower bounds
-    std::vector<double> ub = {1., 1.}; // a <double> vector for upper bounds
+    int n_vars = 3; // dim of variables = number of chromos
+    std::vector<double> lb = {0., 0., 0.}; // a <double> vector for lower bounds
+    std::vector<double> ub = {1., 1., 1.}; // a <double> vector for upper bounds
     double k_precision = 1e-5; // solution precision
 
     ga1.SetProblemProperty(n_pop, n_vars, lb, ub, k_precision);
+    ga1.fitness = FitnessFunc;
 
     ga1.InitPopulation();
     

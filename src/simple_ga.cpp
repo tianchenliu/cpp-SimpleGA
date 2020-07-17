@@ -3,11 +3,6 @@
 SimpleGa::SimpleGa(){}
 SimpleGa::~SimpleGa(){}
 
-double SimpleGa::FitnessFunc(std::vector<double> x) {
-  double fval = pow(x[0] - 0.4, 2) + pow(x[1] - 0.7, 2);
-  return fval;
-}
-
 double SimpleGa::UniformRandomNumber(double lb, double ub) {
     std::random_device rd;  //Will be used to obtain a seed for the random number engine 
     std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
@@ -76,7 +71,7 @@ void SimpleGa::EvalIdv(Individual &idv) {
         }
     }
     idv.val_var = val_var_idv;
-    idv.val_fitness = FitnessFunc(val_var_idv);
+    idv.val_fitness = fitness(val_var_idv);
 }
 
 void SimpleGa::EvalPop() {
@@ -178,8 +173,8 @@ void SimpleGa::PrintStepInfo() {
 }
 
 void SimpleGa::PrintResults() {
-    std::cout << "Best 10 individuals: " << std::endl;
-    for (int i=0; i<10; i++) {
+    std::cout << "Best 5 individuals: " << std::endl;
+    for (int i=0; i<5; i++) {
         pop_next[i].PrintAllInfo();
         std::cout << std::endl;
     }

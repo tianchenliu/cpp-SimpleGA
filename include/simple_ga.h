@@ -8,7 +8,7 @@
 
 #include <numeric>      // std::iota
 #include <algorithm>    // std::sort, std::stable_sort
-
+#include <functional>
 
 #include "chromosome.h"
 #include "individual.h"
@@ -18,8 +18,7 @@ class SimpleGa
 private: 
     double k_pct_selection; // % of individuals selected for next generation
     int n_kept_idv;
-
-public: 
+    
     int n_vars; // dim of variables = number of chromos
     std::vector<double> lb; // a <double> vector for lower bounds
     std::vector<double> ub; // a <double> vector for upper bounds
@@ -32,9 +31,10 @@ public:
 
     std::vector<Individual> pop;
     std::vector<std::vector<double> > val_pop;
-
     std::vector<Individual> pop_next;
 
+public: 
+    std::function<double (std::vector<double>)> fitness;
     bool flag_stop;
     
 public:
@@ -46,7 +46,7 @@ public:
     // Function to set problem properties
     // Used in initializer
     void SetProblemProperty(int, int, std::vector<double>, std::vector<double>, double);
-    double FitnessFunc(std::vector<double>);
+    //double FitnessFunc(std::vector<double>);
 
     // Generate individuals
     Individual GenerateIndividual(int);
