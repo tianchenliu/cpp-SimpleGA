@@ -10,15 +10,17 @@ double SimpleGa::UniformRandomNumber(double lb, double ub) {
     return U_Distr(gen);
 }
 
-void SimpleGa::SetProblemProperty(int n_pop_in, int n_vars_in, std::vector<double> lb_in, std::vector<double> ub_in, double k_precision_in) {
+void SimpleGa::SetProblemProperty(std::function<double (std::vector<double>)> fitness_in, int n_pop_in, int n_vars_in, std::vector<double> lb_in, std::vector<double> ub_in, double k_precision_in, int n_max_in) {
     counter_idv = 0;
+    this->fitness = fitness_in;
     this->n_pop = n_pop_in;
     
     this->n_vars = n_vars_in; // dim of variables = number of chromos
     this->lb = lb_in; // a <double> vector for lower bounds
     this->ub = ub_in; // a <double> vector for upper bounds
     this->k_precision = k_precision_in;
-    
+    this->n_max = n_max_in;
+
     k_increment.resize(n_vars, 0.);
     n_genes.resize(n_vars, 0);
 
@@ -32,6 +34,7 @@ void SimpleGa::SetProblemProperty(int n_pop_in, int n_vars_in, std::vector<doubl
     n_kept_idv = int(k_pct_selection * n_pop);
 
     flag_stop = false;
+    
 }
 
 Individual SimpleGa::GenerateIndividual(int id) {
@@ -133,11 +136,22 @@ void SimpleGa::CrossoverMutation() {
     }    
 }
 
-bool SimpleGa::CheckStop() {
-    if (counter_idv > 2000) {
+void SimpleGa::CheckStop() {
+    if (counter_idv > n_max) {
         flag_stop = true;
     }
-    return flag_stop;
+}
+
+void SimpleGa::Run() {
+    InitPopulation();
+    while (!flag_stop) {
+        EvalPop();
+        Selection();
+        CrossoverMutation();
+        CheckStop();
+        PrintStepInfo();
+    }
+    PrintResults();
 }
 
 void SimpleGa::PrintAllInfo() {
