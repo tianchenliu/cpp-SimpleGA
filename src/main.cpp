@@ -17,7 +17,7 @@ int main()
     double k_precision = 1e-5; // solution precision
     int n_max = 1000;
 
-    ga1.SetProblemProperty(FitnessFunc, n_pop, n_vars, lb, ub, k_precision, n_max);
+    ga1.SetProblem(FitnessFunc, n_pop, n_vars, lb, ub, k_precision, n_max);
 
     ga1.Run();
     
