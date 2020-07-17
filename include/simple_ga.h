@@ -44,9 +44,8 @@ public:
 
     double UniformRandomNumber(double, double); 
 
-    // Function to set problem properties
-    // Used in initializer
-    void SetProblemProperty(std::function<double (std::vector<double>)>, int, int, std::vector<double>, std::vector<double>, double, int);
+    // Function to set problem
+    void SetProblem(std::function<double (std::vector<double>)>, int, int, std::vector<double>, std::vector<double>, double, int);
 
     // Generate individuals
     Individual GenerateIndividual(int);

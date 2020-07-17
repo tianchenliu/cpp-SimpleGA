@@ -10,7 +10,7 @@ double SimpleGa::UniformRandomNumber(double lb, double ub) {
     return U_Distr(gen);
 }
 
-void SimpleGa::SetProblemProperty(std::function<double (std::vector<double>)> fitness_in, int n_pop_in, int n_vars_in, std::vector<double> lb_in, std::vector<double> ub_in, double k_precision_in, int n_max_in) {
+void SimpleGa::SetProblem(std::function<double (std::vector<double>)> fitness_in, int n_pop_in, int n_vars_in, std::vector<double> lb_in, std::vector<double> ub_in, double k_precision_in, int n_max_in) {
     counter_idv = 0;
     this->fitness = fitness_in;
     this->n_pop = n_pop_in;
